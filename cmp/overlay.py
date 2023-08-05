@@ -1,6 +1,9 @@
+
+from const.dom import GUEST_NAV_OVERLAY_ID
+from const.hs import HS_CLICK_GUEST_NAV_OVERLAY
+
 class GuestNavOverlay:
     def __init__(self):
-        self.id = 'guest-nav-overlay'
-        self.selector = f'#{self.id}'
+        pass
     def HTML(self):
-        return f'<div _="" id="{self.id}" class="fixed hidden opacity-50 bg-black top-0 w-full h-full z-30"></div>'
+        return f'<div {HS_CLICK_GUEST_NAV_OVERLAY} id="{GUEST_NAV_OVERLAY_ID}" class="fixed hidden opacity-50 bg-black top-0 w-full h-full z-30"></div>'
