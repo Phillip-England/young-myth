@@ -21,7 +21,7 @@ class PageHome:
 		async def read_page_home(request: Request):
 			return self.templates.TemplateResponse("index.html", {"request": request, "components": {
 				"guest_banner": guest_banner(),
-				"main_overlay": guest_nav_overlay(),
+				"guest_nav_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/"),
 				"big_loader": big_loader(),
@@ -37,7 +37,7 @@ class PageLogin:
 			return self.templates.TemplateResponse("login.html", {"request": request, "components": {
 				"login_form": login_form(),
 				"guest_banner": guest_banner(),
-				"main_overlay": guest_nav_overlay(),
+				"guest_nav_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/login"),
 				"big_loader": big_loader(),
@@ -53,7 +53,7 @@ class PageSignup:
 			return self.templates.TemplateResponse("signup.html", {"request": request, "components": {
 				"signup_form": signup_form(),
 				"guest_banner": guest_banner(),
-				"main_overlay": guest_nav_overlay(),
+				"guest_nav_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/signup"),
 				"big_loader": big_loader(),
