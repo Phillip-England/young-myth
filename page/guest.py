@@ -10,6 +10,7 @@ from cmp.overlay import guest_nav_overlay
 from cmp.form import login_form, signup_form
 from cmp.meta import metadata
 from cmp.nav import guest_nav_menu
+from cmp.loader import big_loader
 
 class PageHome:
 	def __init__(self, app: FastAPI, templates: Jinja2Templates):
@@ -23,6 +24,7 @@ class PageHome:
 				"main_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/"),
+				"big_loader": big_loader(),
 			}})
 
 class PageLogin:
@@ -38,6 +40,7 @@ class PageLogin:
 				"main_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/login"),
+				"big_loader": big_loader(),
 			}})
 
 class PageSignup:
@@ -53,4 +56,5 @@ class PageSignup:
 				"main_overlay": guest_nav_overlay(),
 				"metadata": metadata(),
 				"guest_nav_menu": guest_nav_menu(path="/signup"),
+				"big_loader": big_loader(),
 			}})

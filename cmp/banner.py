@@ -13,10 +13,10 @@ def guest_banner():
 				{header_xl(text="CFA Suite")}
 				{text_sm(text="Keep up with your ever growing team")}
 			</div>
-			<div {HS_CLICK_GUEST_BANNER_BARS} id="{GUEST_BANNER_BARS_ID}" class="p-4">
+			<div _="{HS_CLICK_GUEST_BANNER_BARS}" id="{GUEST_BANNER_BARS_ID}" class="p-4">
 				{fontawesome_icon('fa-bars', 'fa-lg')}
 			</div>
-			<div {HS_CLICK_GUEST_BANNER_X} id="{GUEST_BANNER_X_ID}" class="p-4 hidden">
+			<div _="{HS_CLICK_GUEST_BANNER_X}" id="{GUEST_BANNER_X_ID}" class="p-4 hidden">
 				{fontawesome_icon('fa-x', 'fa-lg')}
 			</div>
 		</div>
