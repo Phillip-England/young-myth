@@ -16,7 +16,7 @@ def guest_nav_menu(path: str):
 def nav_menu_list_item(text: str, href: str, path: str, hs_event: str = ""):
     if href == path:
         return f'''
-			<li _="{hs_event}" class="flex border border-gray-200 m-1 rounded">
+			<li _="{hs_event}" class="flex border border-l-2 border-t-2 border-gray-200 m-1 rounded">
 				<a class="p-4 w-full font-text text-sm underline text-main" href={href}>{text}</a>
 			</li>
 		'''
