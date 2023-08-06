@@ -9,6 +9,7 @@ from cmp.form import login_form, signup_form
 from cmp.meta import metadata
 from cmp.nav import guest_nav_menu
 from cmp.loader import big_loader
+from cmp.footer import guest_footer
 
 
 def page_home(app: FastAPI, templates: Jinja2Templates):
@@ -20,6 +21,7 @@ def page_home(app: FastAPI, templates: Jinja2Templates):
 			"metadata": metadata(),
 			"guest_nav_menu": guest_nav_menu(path="/"),
 			"big_loader": big_loader(),
+			"guest_footer": guest_footer(),
 		}})
 
 def page_login(app: FastAPI, templates: Jinja2Templates):
@@ -32,6 +34,7 @@ def page_login(app: FastAPI, templates: Jinja2Templates):
 			"metadata": metadata(),
 			"guest_nav_menu": guest_nav_menu(path="/login"),
 			"big_loader": big_loader(),
+			"guest_footer": guest_footer(),
 		}})
 
 
@@ -45,4 +48,5 @@ def page_signup(app: FastAPI, templates: Jinja2Templates):
 			"metadata": metadata(),
 			"guest_nav_menu": guest_nav_menu(path="/signup"),
 			"big_loader": big_loader(),
+			"guest_footer": guest_footer(),
 		}})

@@ -22,6 +22,6 @@ def nav_menu_list_item(text: str, href: str, path: str, hs_event: str = ""):
 		'''
     return f'''
 		<li _="{hs_event}" class="flex border border-gray-200 m-1 rounded">
-			<a class="p-4 w-full font-text text-sm" href={href}>{text}</a>
+			<a class="p-4 w-full font-text text-sm text-textColor" href={href}>{text}</a>
 		</li>
 	'''
