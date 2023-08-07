@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Query
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -40,9 +40,9 @@ def page_login(app: FastAPI, templates: Jinja2Templates):
 
 def page_signup(app: FastAPI, templates: Jinja2Templates):
 	@app.get("/signup", response_class=HTMLResponse)
-	async def read_page_signup(request: Request):
+	async def read_page_signup(request: Request, form_err: str=Query(''), email: str=Query(''), password: str=Query('')):
 		return templates.TemplateResponse("signup.html", {"request": request, "components": {
-			"signup_form": signup_form(),
+			"signup_form": signup_form(form_err, email, password),
 			"guest_banner": guest_banner(),
 			"guest_nav_overlay": guest_nav_overlay(),
 			"metadata": metadata(),

@@ -1,5 +1,5 @@
 
-from cmp.text import header_xxl
+from cmp.text import header_xxl, text_form_error
 from cmp.button import submit_button
 from cmp.input import text_input
 
@@ -16,12 +16,14 @@ def login_form():
 		</form>
 	'''
 
-def signup_form():
+def signup_form(err: str = '', email: str = '', password: str = ''):
+	error_component = text_form_error(err) if err else ''
 	return f'''
 		<form hx-boost="true" id="signup-form" class="{CLASS_FORM_CONTAINER}" method="POST" action="/signup">
 			{header_xxl(text='Signup')}
-			{text_input(label="Email", name="email")}
-			{text_input(label="Password", name='password')}
+			{error_component}
+			{text_input(label="Email", name="email", value=email)}
+			{text_input(label="Password", name='password', value=password)}
 			{submit_button(value="Signup")}
 		</form>
 	'''
