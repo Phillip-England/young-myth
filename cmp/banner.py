@@ -1,4 +1,3 @@
-
 from const.hs import HS_CLICK_GUEST_BANNER_BARS, HS_CLICK_GUEST_BANNER_X
 from const.dom import GUEST_BANNER_BARS_ID, GUEST_BANNER_X_ID
 
@@ -7,7 +6,7 @@ from cmp.icon import fontawesome_icon
 
 
 def guest_banner():
-	return f'''
+    return f"""
 		<div class="h-20 fixed bg-white z-50 top-0 w-full border-b-4 border-gray-200 justify-between flex items-center">
 			<div class="p-4">
 				{header_xl(text="CFA Suite")}
@@ -21,6 +20,4 @@ def guest_banner():
 			</div>
 		</div>
 		<div class="h-20"></div>
-	'''
-
-
+	"""

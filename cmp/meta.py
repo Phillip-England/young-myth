@@ -1,7 +1,5 @@
-
-
 def metadata():
-	return f'''
+    return f"""
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,5 +9,4 @@ def metadata():
 		<script src="https://kit.fontawesome.com/ef0709a418.js" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/htmx.org@1.9.4"></script>
 		<link rel="stylesheet" href="/static/styles/output.css">
-	'''
-	
+	"""

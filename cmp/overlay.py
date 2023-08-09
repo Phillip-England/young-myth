@@ -1,4 +1,3 @@
-
 from const.dom import GUEST_NAV_OVERLAY_ID
 from const.hs import HS_CLICK_GUEST_NAV_OVERLAY
 

@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 
 from fastapi import FastAPI
@@ -6,7 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from page.guest import page_home, page_login, page_signup
-from api.user import api_signup_user, api_login_user
+from api.user.ApiLoginUser import api_login_user
+from api.user.ApiSignupUser import ApiSignupUser
 
 from db.config import connect_db, run_migrations
 
@@ -25,5 +25,5 @@ page_home(app, templates)
 page_login(app, templates)
 page_signup(app, templates)
 
-api_signup_user(app, db_connection)
+ApiSignupUser(app, db_connection).mount()
 api_login_user(app, db_connection)
