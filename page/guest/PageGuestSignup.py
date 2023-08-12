@@ -38,7 +38,7 @@ class PageGuestSignup:
             "guest_banner": guest_banner(),
             "guest_nav_overlay": guest_nav_overlay(),
             "metadata": metadata(),
-            "guest_nav_menu": guest_nav_menu(path={PATH_PAGE_GUEST_SIGNUP}),
+            "guest_nav_menu": guest_nav_menu(path=self.path),
             "big_loader": big_loader(),
             "guest_footer": guest_footer(),
         }

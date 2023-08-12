@@ -6,7 +6,6 @@ from const.path import PATH_PAGE_GUEST_HOME
 
 from cmp.banner import guest_banner
 from cmp.overlay import guest_nav_overlay
-from cmp.form import login_form
 from cmp.meta import metadata
 from cmp.nav import guest_nav_menu
 from cmp.loader import big_loader
