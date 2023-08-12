@@ -7,4 +7,3 @@ def is_email(email: str):
         return True
     else:
         return False
-

@@ -4,7 +4,6 @@ import psycopg2
 from psycopg2.extensions import connection
 
 
-
 def connect_db():
     try:
         connection_string = os.getenv("POSTGRES_CONNECTION_STRING")

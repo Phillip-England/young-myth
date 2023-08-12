@@ -1,4 +1,4 @@
-def text_input(label: str, name: str, input_type: str = 'text', value: str = ""):
+def text_input(label: str, name: str, input_type: str = "text", value: str = ""):
     return f"""
 		<div class="flex flex-col">
 			<label for="{name}" class="text-xs font-text mb-1 text-textColor">{label}</label>

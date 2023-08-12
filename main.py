@@ -5,8 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from page.guest import page_home, page_login, page_signup
-from api.user.ApiLoginUser import ApiLoginUser
-from api.user.ApiSignupUser import ApiSignupUser
+from api.user.ApiUserLogin import ApiUserLogin
+from api.user.ApiUserSignup import ApiUserSignup
 
 from db.config import connect_db, run_migrations
 
@@ -25,5 +25,5 @@ page_home(app, templates)
 page_login(app, templates)
 page_signup(app, templates)
 
-ApiSignupUser(app, db_connection).mount()
-ApiLoginUser(app, db_connection).mount()
+ApiUserSignup(app, db_connection).mount()
+ApiUserLogin(app, db_connection).mount()

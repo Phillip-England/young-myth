@@ -35,9 +35,9 @@ def page_login(app: FastAPI, templates: Jinja2Templates):
     @app.get("/login", response_class=HTMLResponse)
     async def read_page_login(
         request: Request,
-        form_err: str = Query(''),
-        email: str = Query(''),
-        password: str = Query('')
+        form_err: str = Query(""),
+        email: str = Query(""),
+        password: str = Query(""),
     ):
         print(form_err, email, password)
         return templates.TemplateResponse(
