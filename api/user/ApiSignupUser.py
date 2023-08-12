@@ -34,7 +34,8 @@ class ApiSignupUser:
             self.insert_user()
             err = self.send_account_verification_email()
             if err != None:
-                return self.server_error_redirect()
+                print(err)
+                # return self.server_error_redirect()
             return self.success_redirect()
         
     def form_err_redirect(self, form_err: str):
