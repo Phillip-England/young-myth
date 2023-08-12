@@ -15,6 +15,7 @@ from const.path import (
     PATH_API_USER_SIGNUP,
     PATH_PAGE_GUEST_LOGIN,
     PATH_API_USER_VERIFY_EMAIL,
+    PATH_PAGE_GUEST_SIGNUP,
 )
 
 
@@ -46,7 +47,7 @@ class ApiUserSignup:
 
     def form_err_redirect(self, form_err: str):
         return RedirectResponse(
-            f"{self.path}?form_err={form_err}&email={self.email}&password={self.password}",
+            f"{PATH_PAGE_GUEST_SIGNUP}?form_err={form_err}&email={self.email}&password={self.password}",
             302,
         )
 
