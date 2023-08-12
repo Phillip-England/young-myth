@@ -4,16 +4,21 @@ from fastapi.templating import Jinja2Templates
 
 from cmp.banner import guest_banner
 from cmp.overlay import guest_nav_overlay
-
 from cmp.form import login_form, signup_form
 from cmp.meta import metadata
 from cmp.nav import guest_nav_menu
 from cmp.loader import big_loader
 from cmp.footer import guest_footer
 
+from const.path import (
+    PATH_PAGE_GUEST_SIGNUP,
+    PATH_PAGE_GUEST_LOGIN,
+    PATH_PAGE_GUEST_HOME,
+)
+
 
 def page_home(app: FastAPI, templates: Jinja2Templates):
-    @app.get("/", response_class=HTMLResponse)
+    @app.get(PATH_PAGE_GUEST_HOME, response_class=HTMLResponse)
     async def read_page_home(request: Request):
         return templates.TemplateResponse(
             "index.html",
@@ -32,14 +37,13 @@ def page_home(app: FastAPI, templates: Jinja2Templates):
 
 
 def page_login(app: FastAPI, templates: Jinja2Templates):
-    @app.get("/login", response_class=HTMLResponse)
+    @app.get(PATH_PAGE_GUEST_LOGIN, response_class=HTMLResponse)
     async def read_page_login(
         request: Request,
         form_err: str = Query(""),
         email: str = Query(""),
         password: str = Query(""),
     ):
-        print(form_err, email, password)
         return templates.TemplateResponse(
             "login.html",
             {
@@ -58,7 +62,7 @@ def page_login(app: FastAPI, templates: Jinja2Templates):
 
 
 def page_signup(app: FastAPI, templates: Jinja2Templates):
-    @app.get("/signup", response_class=HTMLResponse)
+    @app.get(PATH_PAGE_GUEST_SIGNUP, response_class=HTMLResponse)
     async def read_page_signup(
         request: Request,
         form_err: str = Query(""),

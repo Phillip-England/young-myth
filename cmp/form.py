@@ -2,6 +2,8 @@ from cmp.text import header_xxl, text_form_error
 from cmp.button import submit_button
 from cmp.input import text_input
 
+from const.path import PATH_API_USER_LOGIN, PATH_API_USER_SIGNUP
+
 CLASS_FORM_CONTAINER = (
     "p-4 m-2 rounded border border-t-2 border-l-2 border-gray-200 flex flex-col gap-4"
 )
@@ -10,7 +12,7 @@ CLASS_FORM_CONTAINER = (
 def login_form(err: str = "", email: str = "", password: str = ""):
     error_component = text_form_error(err) if err else ""
     return f"""
-		<form hx-boost="true" id="login-form" class="{CLASS_FORM_CONTAINER}" method="POST" action="/login">
+		<form hx-boost="true" id="login-form" class="{CLASS_FORM_CONTAINER}" method="POST" action="{PATH_API_USER_LOGIN}">
 			{header_xxl(text='Login')}
 			{error_component}
 			{text_input(label="Email", name="email", value=email)}
@@ -23,7 +25,7 @@ def login_form(err: str = "", email: str = "", password: str = ""):
 def signup_form(err: str = "", email: str = "", password: str = ""):
     error_component = text_form_error(err) if err else ""
     return f"""
-		<form hx-boost="true" id="signup-form" class="{CLASS_FORM_CONTAINER}" method="POST" action="/signup">
+		<form hx-boost="true" id="signup-form" class="{CLASS_FORM_CONTAINER}" method="POST" action={PATH_API_USER_SIGNUP}>
 			{header_xxl(text='Signup')}
 			{error_component}
 			{text_input(label="Email", name="email", value=email)}

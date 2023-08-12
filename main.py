@@ -4,7 +4,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from page.guest import page_home, page_login, page_signup
+from page.guest.PageGuestHome import PageGuestHome
+from page.guest.PageGuestLogin import PageGuestLogin
+from page.guest.PageGuestSignup import PageGuestSignup
 from api.user.ApiUserLogin import ApiUserLogin
 from api.user.ApiUserSignup import ApiUserSignup
 
@@ -21,9 +23,9 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-page_home(app, templates)
-page_login(app, templates)
-page_signup(app, templates)
+PageGuestSignup(app, templates).mount()
+PageGuestHome(app, templates).mount()
+PageGuestLogin(app, templates).mount()
 
 ApiUserSignup(app, db_connection).mount()
 ApiUserLogin(app, db_connection).mount()

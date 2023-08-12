@@ -1,5 +1,3 @@
-
-
 from const.dom import (
     GUEST_BANNER_BARS_ID,
     GUEST_BANNER_X_ID,

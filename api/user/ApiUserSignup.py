@@ -11,13 +11,18 @@ from sendgrid.helpers.mail import Mail
 
 from util.validate import is_email
 from util.security import hash_value, get_random_characters
+from const.path import (
+    PATH_API_USER_SIGNUP,
+    PATH_PAGE_GUEST_LOGIN,
+    PATH_API_USER_VERIFY_EMAIL,
+)
 
 
 class ApiUserSignup:
     def __init__(self, app: FastAPI, db: connection):
         self.app = app
         self.db = db
-        self.path = "/signup"
+        self.path = PATH_API_USER_SIGNUP
         self.email = ""
         self.password = ""
         self.hashed_password = ""
@@ -47,7 +52,7 @@ class ApiUserSignup:
 
     def success_redirect(self):
         return RedirectResponse(
-            f"/login?email={self.email}&password={self.password}", 302
+            f"{PATH_PAGE_GUEST_LOGIN}?email={self.email}&password={self.password}", 302
         )
 
     def validate_form_values(self):
@@ -105,9 +110,13 @@ class ApiUserSignup:
         try:
             verification_link = ""
             if os.getenv("PYTHON_ENV") == "dev":
-                verification_link = f'{os.getenv("DEV_URL")}/api/user/verify_email'
+                verification_link = (
+                    f'{os.getenv("DEV_URL")}{PATH_API_USER_VERIFY_EMAIL}'
+                )
             else:
-                verification_link = f'{os.getenv("PROD_URL")}/api/user/verify_email'
+                verification_link = (
+                    f'{os.getenv("PROD_URL")}{PATH_API_USER_VERIFY_EMAIL}'
+                )
             message = Mail(
                 from_email=os.environ.get("APP_EMAIL"),
                 to_emails=self.email,
