@@ -1,9 +1,13 @@
 import time
+import os
 
 from fastapi import FastAPI, Form
 from fastapi.responses import RedirectResponse
 
 from psycopg2.extensions import connection
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 from util.validate import is_email
 from util.security import hash_value, get_random_characters
@@ -21,7 +25,6 @@ class ApiSignupUser:
     def mount(self):
         @self.app.post(self.path)
         async def endpoint(email=Form(""), password=Form("")):
-            start = time.time()
             self.consume_form_data(email, password)
             redirect = self.validate_form_values()
             if redirect != None:
@@ -29,24 +32,19 @@ class ApiSignupUser:
             self.hash_password()
             self.generate_email_key()
             self.insert_user()
-            return RedirectResponse("/login", 302)
-    
-    async def controller(self, email=Form(''), password=Form('')):
-        start = time.time()
-        self.consume_form_data(email, password)
-        redirect = self.validate_form_values()
-        if redirect != None:
-            return redirect
-        self.hash_password()
-        self.generate_email_key()
-        self.insert_user()
-        return RedirectResponse("/login", 302)
+            err = self.send_account_verification_email()
+            if err != None:
+                return self.server_error_redirect()
+            return self.success_redirect()
         
     def form_err_redirect(self, form_err: str):
         return RedirectResponse(
-            f'/signup?form_err={form_err}&email={self.email}&password={self.password}',
+            f'{self.path}?form_err={form_err}&email={self.email}&password={self.password}',
             302,
         )
+    
+    def success_redirect(self):
+        return RedirectResponse(f'/login?email={self.email}&password={self.password}', 302)
     
     def validate_form_values(self):
         redirect = self.validate_email()
@@ -98,3 +96,25 @@ class ApiSignupUser:
         cursor.execute(query, values)
         self.db.commit()
         cursor.close()
+
+    def send_account_verification_email(self):
+        try:
+            verification_link = ''
+            if os.getenv('PYTHON_ENV') == 'dev':
+                verification_link = f'{os.getenv("DEV_URL")}/api/user/verify_email'
+            else:
+                verification_link = f'{os.getenv("PROD_URL")}/api/user/verify_email'
+            message = Mail(
+                from_email=os.environ.get('APP_EMAIL'),
+                to_emails=self.email,
+                subject="CFA Suite | Account Verification",
+                html_content=f'''
+                    <p>Click this link to verify your account</p>
+                    <p>{verification_link}</p>
+                ''',
+            )
+            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+            sg.send(message)
+            return None
+        except Exception as e:
+            return e

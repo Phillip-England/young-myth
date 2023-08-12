@@ -33,13 +33,19 @@ def page_home(app: FastAPI, templates: Jinja2Templates):
 
 def page_login(app: FastAPI, templates: Jinja2Templates):
     @app.get("/login", response_class=HTMLResponse)
-    async def read_page_login(request: Request):
+    async def read_page_login(
+        request: Request,
+        form_err: str = Query(''),
+        email: str = Query(''),
+        password: str = Query('')
+    ):
+        print(form_err, email, password)
         return templates.TemplateResponse(
             "login.html",
             {
                 "request": request,
                 "components": {
-                    "login_form": login_form(),
+                    "login_form": login_form(form_err, email, password),
                     "guest_banner": guest_banner(),
                     "guest_nav_overlay": guest_nav_overlay(),
                     "metadata": metadata(),

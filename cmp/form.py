@@ -7,12 +7,14 @@ CLASS_FORM_CONTAINER = (
 )
 
 
-def login_form():
+def login_form(err: str = '', email: str = '', password: str = ''):
+    error_component = text_form_error(err) if err else ""
     return f"""
 		<form hx-boost="true" id="login-form" class="{CLASS_FORM_CONTAINER}" method="POST" action="/login">
 			{header_xxl(text='Login')}
-			{text_input(label="Email", name="email")}
-			{text_input(label="Password", name="password")}
+			{error_component}
+			{text_input(label="Email", name="email", value=email)}
+			{text_input(label="Password", name="password", input_type='password', value=password)}
 			{submit_button(value="Login")}
 		</form>
 	"""
