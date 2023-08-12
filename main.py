@@ -7,8 +7,10 @@ from fastapi.templating import Jinja2Templates
 from page.guest.PageGuestHome import PageGuestHome
 from page.guest.PageGuestLogin import PageGuestLogin
 from page.guest.PageGuestSignup import PageGuestSignup
+
 from api.user.ApiUserLogin import ApiUserLogin
 from api.user.ApiUserSignup import ApiUserSignup
+from api.user.ApiUserVerfiyEmail import ApiUserVerifyEmail
 
 from db.config import connect_db, run_migrations
 
@@ -29,3 +31,4 @@ PageGuestLogin(app, templates).mount()
 
 ApiUserSignup(app, db_connection).mount()
 ApiUserLogin(app, db_connection).mount()
+ApiUserVerifyEmail(app, db_connection).mount()

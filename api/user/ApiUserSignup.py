@@ -3,9 +3,7 @@ import os
 
 from fastapi import FastAPI, Form
 from fastapi.responses import RedirectResponse
-
 from psycopg2.extensions import connection
-
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -28,6 +26,7 @@ class ApiUserSignup:
         self.password = ""
         self.hashed_password = ""
         self.email_key = ""
+        self.user_id = int
 
     def mount(self):
         @self.app.post(self.path)
@@ -104,6 +103,7 @@ class ApiUserSignup:
         """
         values = (self.email, self.hashed_password, self.email_key)
         cursor.execute(query, values)
+        self.user_id = cursor.fetchone()[0]
         self.db.commit()
         cursor.close()
 
@@ -112,11 +112,11 @@ class ApiUserSignup:
             verification_link = ""
             if os.getenv("PYTHON_ENV") == "dev":
                 verification_link = (
-                    f'{os.getenv("DEV_URL")}{PATH_API_USER_VERIFY_EMAIL}'
+                    f'{os.getenv("DEV_URL")}{PATH_API_USER_VERIFY_EMAIL}/{self.email_key}'
                 )
             else:
                 verification_link = (
-                    f'{os.getenv("PROD_URL")}{PATH_API_USER_VERIFY_EMAIL}'
+                    f'{os.getenv("PROD_URL")}{PATH_API_USER_VERIFY_EMAIL}/{self.email_key}'
                 )
             message = Mail(
                 from_email=os.environ.get("APP_EMAIL"),

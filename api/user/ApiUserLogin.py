@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse
 from psycopg2.extensions import connection
 
-from const.path import PATH_API_USER_LOGIN
+from const.path import PATH_API_USER_LOGIN, PATH_PAGE_GUEST_LOGIN
 
 
 class ApiUserLogin:
@@ -12,7 +12,7 @@ class ApiUserLogin:
         self.path = PATH_API_USER_LOGIN
 
     def mount(self):
-        @self.app.post("/login")
+        @self.app.post(self.path)
         async def controller(request: Request, email=Form(None), password=Form(None)):
             print(email, password)
-            return RedirectResponse(PATH_API_USER_LOGIN, 302)
+            return RedirectResponse(PATH_PAGE_GUEST_LOGIN, 302)

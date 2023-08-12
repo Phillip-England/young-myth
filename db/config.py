@@ -14,7 +14,18 @@ def connect_db():
 
 
 def run_migrations(db_connection: connection):
+    # delete_user_table(db_connection)
     create_user_table(db_connection)
+    
+def delete_user_table(db_connection: connection):
+    cursor = db_connection.cursor()
+    query = """
+        DROP TABLE IF EXISTS "user"
+    """
+    cursor.execute(query)
+    db_connection.commit()
+    cursor.close()
+
 
 
 def create_user_table(db_connection: connection):
@@ -24,7 +35,8 @@ def create_user_table(db_connection: connection):
 			id SERIAL PRIMARY KEY,
 			email VARCHAR(255) NOT NULL,
 			password VARCHAR(255) NOT NULL,
-			email_key VARCHAR(255) NOT NULL
+			email_key VARCHAR(255) NOT NULL,
+            active BOOLEAN NOT NULL DEFAULT FALSE
 		)
 	"""
     cursor.execute(query)
